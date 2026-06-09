@@ -1,0 +1,98 @@
+#include<stdio.h>
+
+int divisionHash(int key,int size)
+{
+    return key % size;
+}
+
+int multiplicationHash(int key,int size)
+{
+    float A=0.618;
+    float value=key*A;
+    return (int)(size*(value-(int)value));
+}
+
+int midSquareHash(int key)
+{
+    long int square=key*key;
+    return (square/10)%100;
+}
+
+int foldingHash(int key)
+{
+    int sum=0;
+
+    while(key>0)
+    {
+        sum=sum+(key%100);
+        key=key/100;
+    }
+
+    return sum;
+}
+
+int main()
+{
+    int choice,key,size;
+
+    while(1)
+    {
+        printf("\n1.Division Method");
+        printf("\n2.Multiplication Method");
+        printf("\n3.Mid-Square Method");
+        printf("\n4.Folding Method");
+        printf("\n5.Exit");
+
+        printf("\nEnter Choice: ");
+        scanf("%d",&choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("Enter Table Size: ");
+                scanf("%d",&size);
+
+                printf("Enter Key: ");
+                scanf("%d",&key);
+
+                printf("Hash Value = %d\n",
+                       divisionHash(key,size));
+                break;
+
+            case 2:
+                printf("Enter Table Size: ");
+                scanf("%d",&size);
+
+                printf("Enter Key: ");
+                scanf("%d",&key);
+
+                printf("Hash Value = %d\n",
+                       multiplicationHash(key,size));
+                break;
+
+            case 3:
+                printf("Enter Key: ");
+                scanf("%d",&key);
+
+                printf("Hash Value = %d\n",
+                       midSquareHash(key));
+                break;
+
+            case 4:
+                printf("Enter Key: ");
+                scanf("%d",&key);
+
+                printf("Hash Value = %d\n",
+                       foldingHash(key));
+                break;
+
+            case 5:
+                return 0;
+
+            default:
+                printf("Invalid Choice\n");
+        }
+    }
+
+    return 0;
+}
